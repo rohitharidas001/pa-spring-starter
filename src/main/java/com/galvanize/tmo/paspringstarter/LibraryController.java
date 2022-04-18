@@ -29,10 +29,10 @@ public class LibraryController {
 
     @GetMapping("/api/books")
     public ResponseEntity<?> getAllBooks() {
-        List<Book> result = (List<Book>) libraryRepository.findAll();
+        List<Book> detailedResult = (List<Book>) libraryRepository.findAll();
         Comparator<Book> titleSorter = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
-        result.sort(titleSorter);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        detailedResult.sort(titleSorter);
+        return new ResponseEntity<>(detailedResult, HttpStatus.OK);
     }
 
     @DeleteMapping("/api/books")
