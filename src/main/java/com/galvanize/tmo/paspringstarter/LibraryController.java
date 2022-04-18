@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -29,6 +30,8 @@ public class LibraryController {
     @GetMapping("/api/books")
     public ResponseEntity<?> getAllBooks() {
         List<Book> result = (List<Book>) libraryRepository.findAll();
+        Comparator<Book> titleSorter = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
+        result.sort(titleSorter);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
